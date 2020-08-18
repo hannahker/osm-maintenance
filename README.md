@@ -1,2 +1,9 @@
 # osm-maintenance
-Collection and analysis of historical OSM data to understand practices of data maintenance following humanitarian mapping activations.
+This repository contains code that can be used to A) Collect historical data using the [OSHDB API](https://github.com/GIScience/oshdb), and B) Clean, filter, analyze, and visualize this data to understand characteristics of data production and maintenance for a given area. 
+
+### Necessary Inputs
+
+OSHDB extract
+Case study extent 
+
+### Procedure 
