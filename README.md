@@ -5,7 +5,7 @@ This repository contains code that can be used to A) Collect historical data usi
 
 This code requires an OSHDB extract for a given area of interest. Extracts can be downloaded directly from HeiGIt's [download server](http://downloads.ohsome.org/v0.5/), or generated using the ETL process described [here](https://github.com/GIScience/oshdb/tree/master/oshdb-tool/etl). 
 
-This code also requires a simple CSV file with spatial and temporal parameters that describe the extent of your area of interest. The format of this CSV file should follow the example provided here, _case_studies.csv_. As is included in this file, you should specify a brief string identifier for your case study or area of interest (<case-study-name>). 
+This code also requires a simple CSV file with spatial and temporal parameters that describe the extent of your area of interest. The format of this CSV file should follow the example provided here, _case_studies.csv_. As is included in this file, you should specify a brief string identifier for your case study or area of interest (_<case-study-name>_). 
 
 ### Procedure 
 
