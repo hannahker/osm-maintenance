@@ -1,3 +1,6 @@
+// The structure of this code draws from the many examples that are provided on the OSHDB documentation
+// Available at this link: https://github.com/GIScience/oshdb
+
 package Test1.OSHDB_Test2;
 
 import java.sql.Connection;
@@ -54,25 +57,19 @@ public class StreamTest {
 			Exception {
 		
 // -----------------------------------------------------------------------
-// 0. VARIABLES
+// 0. FILTERING VARIABLES
 // -----------------------------------------------------------------------
-		String timeStart = "2009-12-31";
-		//String timeStart = "2011-09-12";
-		String timeEnd = "2010-12-31";
+		String timeStart = "2009-12-31"; // CHANGE TO YOUR START DATE
+		String timeEnd = "2010-12-31"; // CHANGE TO YOUR END DATE
 		
-		OSHDBBoundingBox bbox = new OSHDBBoundingBox(8.573179,49.352003,8.79405,49.459693); //heid
-		//OSHDBBoundingBox bbox = new OSHDBBoundingBox(18.496906,4.317599,18.594561,4.487146); // car
-		//OSHDBBoundingBox bbox = new OSHDBBoundingBox(34.895,-17.1296,35.3147,-16.3102); // mal
-		//OSHDBBoundingBox bbox = new OSHDBBoundingBox(85.268106,27.667949,85.375557,27.75134); // nep wsen
-		//OSHDBBoundingBox bbox = new OSHDBBoundingBox(124.896758,11.180703,125.078644,11.342878); // tac
-		//OSHDBBoundingBox bbox = new OSHDBBoundingBox(-72.569771,18.339898,-72.158934,18.630734); // pap
+		OSHDBBoundingBox bbox = new OSHDBBoundingBox(8.573179,49.352003,8.79405,49.459693); // CHANGE TO BOUNDING BOX OF YOUR AREA OF INTEREST
 		
-		String output = "C:\\Users\\hanna\\Desktop\\Dissertation\\3_Analyzing\\Data\\hed-nodes.csv";
+		String output = ""; // DEFINE OUTPUT FILE NAME AND PATH (.csv)
 		
 // -----------------------------------------------------------------------
 // 1. PATH TO OSHDB
 // -----------------------------------------------------------------------
-		String path = "C:\\Users\\hanna\\Desktop\\Dissertation\\3_Analyzing\\Data\\Extracts\\heidelberg.oshdb"; 
+		String path = ""; // CHANGE TO THE FILE PATH OF THE LOCAL OSHDB EXTRACT
 		OSHDBH2 oshdb = new OSHDBH2(path);
 
 // -----------------------------------------------------------------------
@@ -81,7 +78,7 @@ public class StreamTest {
 			// Filter the data to get a stream of OSH Entities
 			Stream<OSHEntity> entityStream = OSMContributionView
 			        .on(oshdb)
-			        .osmType(OSMType.NODE)
+			        .osmType(OSMType.NODE) // Comment out either NODE or WAY, depending on which one you want to collect
 			        //.osmType(OSMType.WAY)
 			        .timestamps(timeStart, timeEnd) // Start and end timestamps
 			        .areaOfInterest(bbox) // Area of interest
@@ -94,9 +91,9 @@ public class StreamTest {
 // -----------------------------------------------------------------------
 
 			try {
-				
+				// Declare the filewriter 
 				FileWriter csvWriter = new FileWriter(output);
-
+				// Write each of the column headers 
 				csvWriter.append(
 						"OSH_ID, "
 						+ "OSH_TYP, "
@@ -120,7 +117,6 @@ public class StreamTest {
 					
 					// Get the data of interest from each OSHEntity from the stream
 					OSHDBBoundingBox box = s.getBoundingBox(); // Bounding box
-					//int [] keys = s.getRawTagKeys(); // Tag keys
 					Iterable<? extends OSMEntity> versions = s.getVersions(); // OSMEntity versions
 					long oshID = s.getId(); // Get the OSH ID
 					OSMType type = s.getType(); 
@@ -189,7 +185,7 @@ public class StreamTest {
 									);
 								
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
+							
 							e.printStackTrace();
 						}	
 						
@@ -203,7 +199,7 @@ public class StreamTest {
 				
 			} //End of the try block
 			catch (IOException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			} // End of the catch block
 		} // End of main method
